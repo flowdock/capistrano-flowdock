@@ -1,6 +1,6 @@
 require "capistrano/flowdock/version"
 
-require "capistrano"
+require 'capistrano'
 require 'flowdock'
 require 'digest/md5'
 require 'cgi'
@@ -35,7 +35,7 @@ Capistrano::Configuration.instance(:must_exist).load do
 
       begin
         flows = Array(flowdock_api_token).map do |api_token|
-          Flowdock::Flow.new(:api_token => api_token,
+          ::Flowdock::Flow.new(:api_token => api_token,
           :source => "Capistrano deployment", :project => flowdock_project_name,
           :from => {:name => config["user.name"], :address => config["user.email"]})
         end
