@@ -1,6 +1,7 @@
 # Capistrano::Flowdock
 
-Notify Flowdock flows about Capistrano deployments
+Notify Flowdock flows about Capistrano deployments. These instructions are for
+Capistrano 3. Check out [capistrano-2](https://github.com/flowdock/capistrano-flowdock/tree/capistrano-2) branch for Capistrano 2.x support.
 
 ## Installation
 
@@ -18,12 +19,16 @@ Or install it yourself as:
 
 ## Usage
 
-Load `capistrano-flowdock` in Capistrano `deploy.rb` file and set Flowdock API
-tokens and project configuration.
+Load this gem in Capfile:
 
 ```ruby
-require 'capistrano-flowdock'
+# Capfile
+require 'capistrano/flowdock'
+```
 
+Setup your Flowdock credentials in `deploy.rb`
+
+```ruby
 set :flowdock_api_token, "_YOUR_API_TOKEN_HERE"
 set :flowdock_project_name, "My project" # Optional, defaults to application
 set :flowdock_deploy_tags, ["deploy"] # Optional, defaults to ["deploy"]
