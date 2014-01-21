@@ -1,6 +1,7 @@
 # Capistrano::Flowdock
 
-Notify Flowdock flows about Capistrano deployments
+Notify Flowdock flows about Capistrano deployments. This branch works with
+Capistrano 2.x.
 
 ## Installation
 
