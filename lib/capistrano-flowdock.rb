@@ -1,1 +1,1 @@
-require 'capistrano/flowdock'
+require "capistrano/flowdock/version"
