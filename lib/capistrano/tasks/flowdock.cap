@@ -61,7 +61,11 @@ namespace :flowdock do
   def notification_message
     if fetch(:branch) == fetch(:current_branch)
       message = "<p>The following changes were just deployed to #{fetch(:flowdock_deploy_env)}:</p>"
-      commits = Capistrano::Flowdock.commits_between(fetch(:repo),  fetch(:previous_revision), fetch(:current_revision))
+      commits = if fetch(:previous_revision)
+        Capistrano::Flowdock.commits_between(fetch(:repo),  fetch(:previous_revision), fetch(:current_revision))
+      else
+        []
+      end
 
       unless commits.empty?
         commits.each do |c|
