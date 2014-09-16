@@ -76,7 +76,7 @@ namespace :flowdock do
             long.gsub!(/\n/, '<br />')
             message << '<p style="margin:5px 0px; padding: 0 5px; border-left: 3px solid #ccc">' + long + '</p>'
           end
-          message << "<span style=\"font-size: 90%; color: #333\"><code>#{Capistrano::Flowdock.id_abbrev(c.oid)}</code> <a href=\"mailto:#{CGI.escapeHTML(c.author.email)}\">#{CGI.escapeHTML(c.author[:name].to_s)}</a> on #{c.time.strftime("%b %d, %H:%M")}</span></div></div>"
+          message << "<span style=\"font-size: 90%; color: #333\"><code>#{Capistrano::Flowdock.id_abbrev(c.oid)}</code> <a href=\"mailto:#{CGI.escapeHTML(c.author[:email].to_s)}\">#{CGI.escapeHTML(c.author[:name].to_s)}</a> on #{c.time.strftime("%b %d, %H:%M")}</span></div></div>"
         end
       end
     else
