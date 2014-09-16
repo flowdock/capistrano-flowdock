@@ -61,7 +61,11 @@ namespace :flowdock do
   def notification_message
     if fetch(:branch) == fetch(:current_branch)
       message = "<p>The following changes were just deployed to #{fetch(:flowdock_deploy_env)}:</p>"
-      commits = Capistrano::Flowdock.commits_between(fetch(:repo),  fetch(:previous_revision), fetch(:current_revision))
+      commits = if fetch(:previous_revision)
+        Capistrano::Flowdock.commits_between(fetch(:repo),  fetch(:previous_revision), fetch(:current_revision))
+      else
+        []
+      end
 
       unless commits.empty?
         commits.each do |c|
@@ -72,7 +76,7 @@ namespace :flowdock do
             long.gsub!(/\n/, '<br />')
             message << '<p style="margin:5px 0px; padding: 0 5px; border-left: 3px solid #ccc">' + long + '</p>'
           end
-          message << "<span style=\"font-size: 90%; color: #333\"><code>#{Capistrano::Flowdock.id_abbrev(c.oid)}</code> <a href=\"mailto:#{CGI.escapeHTML(c.author.email)}\">#{CGI.escapeHTML(c.author[:name].to_s)}</a> on #{c.time.strftime("%b %d, %H:%M")}</span></div></div>"
+          message << "<span style=\"font-size: 90%; color: #333\"><code>#{Capistrano::Flowdock.id_abbrev(c.oid)}</code> <a href=\"mailto:#{CGI.escapeHTML(c.author[:email].to_s)}\">#{CGI.escapeHTML(c.author[:name].to_s)}</a> on #{c.time.strftime("%b %d, %H:%M")}</span></div></div>"
         end
       end
     else
