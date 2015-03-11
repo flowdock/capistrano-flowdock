@@ -27,7 +27,7 @@ namespace :flowdock do
       set :repo, Rugged::Repository.new(".")
       set :flowdock_deploy_head_name, fetch(:repo).head.name.split("/", 3).last.chomp
     rescue LoadError => e
-      puts "Flowdock: you need to have Grit gem installed: #{e.to_s}"
+      puts "Flowdock: you need to have Rugged gem installed: #{e.to_s}"
     rescue => e
       puts "Flowdock: error in fetching your git repository information: #{e.to_s}"
     end
