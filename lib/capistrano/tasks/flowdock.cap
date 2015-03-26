@@ -1,6 +1,6 @@
 namespace :flowdock do
   task :read_current_deployed_branch do
-    on roles(:all) do
+    on release_roles(:all) do
       begin
         current_branch = capture(:cat, "#{current_path}/BRANCH").chomp
       rescue
@@ -12,7 +12,7 @@ namespace :flowdock do
   end
 
   task :save_deployed_branch do
-    on roles(:all) do
+    on release_roles(:all) do
       begin
         execute("echo '#{fetch(:flowdock_deploy_head_name)}' > #{current_path}/BRANCH")
       rescue => e
