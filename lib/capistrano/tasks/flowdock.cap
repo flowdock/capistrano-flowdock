@@ -53,7 +53,7 @@ namespace :flowdock do
         flow.push_to_team_inbox(:format => "html",
           :subject => "#{fetch(:flowdock_project_name)} deployed with branch #{fetch(:branch)} on ##{fetch(:flowdock_deploy_env)}",
           :content => notification_message,
-          :tags => ["deploy", "#{fetch(:flowdock_deploy_env)}"] | fetch(:flowdock_deploy_tags))
+          :tags => fetch(:flowdock_deploy_tags, ["deploy", "#{fetch(:flowdock_deploy_env)}"]))
       end unless fetch('dry_run')
     rescue => e
       puts "Flowdock: error in sending notification to your flow: #{e.to_s}"
